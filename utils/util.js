@@ -18,7 +18,7 @@ var createCar = async (carNumber, make, model, color, owner) => {
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = new FileSystemWallet(walletPath);
-        console.log(`Wallet path: ${walletPath}`);
+        // console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the user.
         const userExists = await wallet.exists('user1');
@@ -40,8 +40,6 @@ var createCar = async (carNumber, make, model, color, owner) => {
 
 
         // Submit the specified transaction.
-        // createCar transaction - requires 5 argument, ex: ('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom')
-        // changeCarOwner transaction - requires 2 args , ex: ('changeCarOwner', 'CAR10', 'Dave')
         await contract.submitTransaction('createCar', carNumber, make, model, color, owner);
         
         console.log('Transaction has been submitted');
@@ -60,7 +58,7 @@ var changeCarOwner = async (carNumber, owner) => {
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = new FileSystemWallet(walletPath);
-        console.log(`Wallet path: ${walletPath}`);
+        // console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the user.
         const userExists = await wallet.exists('user1');
@@ -82,8 +80,6 @@ var changeCarOwner = async (carNumber, owner) => {
 
 
         // Submit the specified transaction.
-        // createCar transaction - requires 5 argument, ex: ('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom')
-        // changeCarOwner transaction - requires 2 args , ex: ('changeCarOwner', 'CAR10', 'Dave')
         await contract.submitTransaction('changeCarOwner', carNumber, owner);
         
         console.log('Transaction has been submitted');
@@ -103,7 +99,7 @@ var queryAllcars = async () => {
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = new FileSystemWallet(walletPath);
-        console.log(`Wallet path: ${walletPath}`);
+        // console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the user.
         const userExists = await wallet.exists('user1');
@@ -124,16 +120,7 @@ var queryAllcars = async () => {
         const contract = network.getContract('fabcar');
 
         // Evaluate the specified transaction.
-        // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
-        // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
-        // const result = await contract.evaluateTransaction('queryAllCars');
-
         const result = await contract.evaluateTransaction('queryAllCars');
-        console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-
-        // const result = await contract.evaluateTransaction('queryCar', 'CAR11');
-        // console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-        // result = await contract.evaluateTransaction('queryCar', 'CAR12');
         // console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
 
         return result.toString()
@@ -150,7 +137,7 @@ var queryCar = async (carNumber) => {
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = new FileSystemWallet(walletPath);
-        console.log(`Wallet path: ${walletPath}`);
+        // console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the user.
         const userExists = await wallet.exists('user1');
@@ -171,16 +158,7 @@ var queryCar = async (carNumber) => {
         const contract = network.getContract('fabcar');
 
         // Evaluate the specified transaction.
-        // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
-        // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
-        // const result = await contract.evaluateTransaction('queryAllCars');
-
-        const result = await contract.evaluateTransaction('queryCar', 'CAR2');
-        console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-
-        // const result = await contract.evaluateTransaction('queryCar', 'CAR11');
-        // console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-        // result = await contract.evaluateTransaction('queryCar', 'CAR12');
+        const result = await contract.evaluateTransaction('queryCar', carNumber);
         // console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
 
         return result.toString()

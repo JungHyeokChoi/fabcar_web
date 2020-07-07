@@ -1,31 +1,31 @@
 var express = require('express')
 var app = express()
-var dotenv = require('dotenv')
-var util = require('./utils/util')
+var path = require('path')
+var bodyParser = require('body-parser')
+// var cors = require('cors')
+var apiRouter = require('./routes/Router')
+require('dotenv').config()
 
-dotenv.config()
-var port = process.env.PORT
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise
 
-app.use(express.json())
+var password = process.env.PASSWORD
+var DB = process.env.DB
+var url = `mongodb+srv://root:${password}@cluster0.lkryw.mongodb.net/${DB}?retryWrites=true&w=majority`
+mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
 
-app.get('/', async (req, res) => {
-    var result = await util.queryAllcars()
-    var resData = await JSON.parse(result)
-    console.log(resData)
-    res.send(resData) 
-})
+app.set('views', path.resolve(__dirname + '/views'))
+app.set('view engine', 'ejs')
 
-app.get('/data', async (req, res) => {
-    var result = await util.queryCar('CAR2')
-    var resData = await JSON.parse(result)
-    res.send(resData) 
-})
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json())
 
-app.get('/change', async (req, res) => {
-    await util.changeCarOwner('CAR1', 'CJH')
-    res.redirect('/')
-})
+app.use(express.static(__dirname + '/public'))
+app.use(express.static(path.join(__dirname, 'public/css/')));
 
+app.use('/', apiRouter)
+
+var port = process.env.PORT || 3000
 app.listen(port, (req, res) => {
     console.log(`Server is Starting at http://localhost:${port}`)
 })

@@ -1,0 +1,39 @@
+<%- include('_header.ejs') -%>
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="m-0 font-weight-bold text-primary">Search Result</h1>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Key</th>
+                        <th>Color</th>
+                        <th>docType</th>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Owner</th>
+                        <th>Remark</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(i = 0 ; i < data.length; i++) { %>
+                    <tr>
+                        <td><%= i + 1 %></td>
+                        <td><%= data[i].Key %></td>
+                        <td><%= data[i].Record.color %></td>
+                        <td><%= data[i].Record.docType %></td>
+                        <td><%= data[i].Record.make %></td>
+                        <td><%= data[i].Record.model %></td>
+                        <td><%= data[i].Record.owner %></td>
+                        <td><button type="button" class="btn btn-info">Update</button></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<%- include('_footer.ejs') -%>
