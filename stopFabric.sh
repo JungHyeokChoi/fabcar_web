@@ -8,6 +8,6 @@
 set -e
 
 # launch network; create channel and join peer to channel
-cd ../basic-network
+cd ./basic-network
 ./stop.sh
 ./teardown.sh
