@@ -1,0 +1,34 @@
+<%- include('_header.ejs') -%>
+<div class="card-body">
+    <form action="/changeOwner" method="POST">
+        <div class="form-group">
+            <label for="InputCarNumber">Unique Key</label>
+            <div class="input-group mb-3">
+                <select class="custom-select" name="key" id="InputKey" onchange="getSelectValue(this);">
+                    <option selected>Select Key...</option>
+                    <% for(i = 0; i < data.length; i++) { %>
+                        <option value="<%= data[i].Key %>"><%= data[i].Key %></option>
+                    <% } %>
+                </select>
+            </div>
+        <div class="form-group">
+            <label for="InputOldOwner">Old Owner</label>
+            <input type="text" class="form-control" name="owner" id="InputOldOwner" value="$('selectValue')" disabled>
+        </div>
+        <div class="form-group">
+            <label for="InputNewOwner">New Owner</label>
+            <input type="text" class="form-control" name="owner" id="InputNewOwner" placeholder="New Owner">
+        </div>
+        <button type="submit" class="btn btn-danger">Change</button>
+    </form>
+</div>
+
+<script>
+    var selectValue = function getSelectValue(selectObj){
+        var selected_index = selectObj.selectedIndex;
+        var selected_value = selectObj.options[selected_index].value;
+
+        document.getElementById('InputOldOwner').value = selected_value;
+    }
+</script>
+<%- include('_footer.ejs') -%>
