@@ -1,0 +1,39 @@
+<%- include('_header.ejs') -%>
+<div class="card-body">
+    <form action="/create" method="POST" name="createForm" onsubmit="return validateForm()">
+        <div class="form-group">
+            <label for="InputCarNumber">Unique Key</label>
+            <input type="text" class="form-control" name="key" id="InputCarNumber" placeholder="Car Number" required>
+        </div>
+        <div class="form-group">
+            <label for="InputColor">Color</label>
+            <input type="text" class="form-control" name="color" id="InputColor" placeholder="Color" required>
+        </div>
+        <div class="form-group">
+            <label for="InputMake">Make</label>
+            <input type="text" class="form-control" name="make" id="InputMake" placeholder="Make" required>
+        </div>
+        <div class="form-group">
+            <label for="InputModel">Model</label>
+            <input type="text" class="form-control" name="model" id="InputModel" placeholder="Model" required>
+        </div>
+        <div class="form-group">
+            <label for="InputOwner">Owner</label>
+            <input type="text" class="form-control" name="owner" id="InputOwner" placeholder="Owner" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        var x = document.forms["createForm"]["key"].value;
+        var data = x.slice(0,3)
+        if (data != "CAR") {
+            alert("Form is CAR + Number")
+            return false;
+        }
+        return true;
+    }
+</script>
+<%- include('_footer.ejs') -%>

@@ -7,8 +7,6 @@ router.route('/')
         var result = await queryUtil.queryAllcars()
         var resultData = await JSON.parse(result)
 
-        console.log(result)
-
         res.render('index', {data : resultData})
     })
 
@@ -19,6 +17,22 @@ router.route('/search')
         var resultData = await JSON.parse(result)
 
         res.render('search', {data : resultData, key : searchData})  
+    })
+
+router.route('/create')
+    .get((req,res,next) =>{
+        res.render('create')
+    })
+    .post(async (req, res, next) =>{
+        var key = req.body.key
+        var color = req.body.color
+        var make = req.body.make
+        var model = req.body.model
+        var owner = req.body.owner
+
+        await queryUtil.createCar(key, color, make, model, owner)
+        
+        await res.redirect('/')
     })
 
 router.route('/save/:carNum')
