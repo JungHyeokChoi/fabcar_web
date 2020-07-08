@@ -1,0 +1,31 @@
+<%- include('_header.ejs') -%>
+<div class="card-body">
+    <form action="/save/<%= key %>" method="POST">
+        <div class="form-group">
+            <label for="InputCarNumber">Unique Key</label>
+            <input type="text" class="form-control" name="key" id="InputCarNumber" value="<%= key %>">
+        </div>
+        <div class="form-group">
+            <label for="InputColor">Color</label>
+            <input type="text" class="form-control" name="color" id="InputColor" value="<%= data.color %>">
+        </div>
+        <div class="form-group">
+            <label for="InputDocType">Doc Type</label>
+            <input type="text" class="form-control" name="doctype" id="InputDocType" value="<%= data.docType %>">
+        </div>
+        <div class="form-group">
+            <label for="InputMake">Make</label>
+            <input type="text" class="form-control" name="make" id="InputMake" value="<%= data.make %>">
+        </div>
+        <div class="form-group">
+            <label for="InputModel">Model</label>
+            <input type="text" class="form-control" name="model" id="InputModel" value="<%= data.model %>">
+        </div>
+        <div class="form-group">
+            <label for="InputOwner">Owner</label>
+            <input type="text" class="form-control" name="owner" id="InputOwner" value="<%= data.owner %>">
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>
+<%- include('_footer.ejs') -%>

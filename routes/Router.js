@@ -19,6 +19,31 @@ router.route('/search')
         res.render('search', {data : resultData, key : searchData})  
     })
 
+router.route('/detail/:carNum')
+    .get(async (req, res, next) => {
+        var searchData = req.params.carNum
+        var result = await queryUtil.queryCar(searchData)
+        var resultData = await JSON.parse(result)
+
+        res.render('detail', {data : resultData, key : searchData})  
+    })
+    .post((req, res, next) =>{
+        var contact = new Car()
+
+        contact.key = req.body.key
+        contact.color = req.body.color
+        contact.doctype = req.body.doctype
+        contact.make = req.body.make
+        contact.model = req.body.model
+        contact.owner = req.body.owner
+
+        contact.save((err, result) => {
+            if(err) next(err)
+            console.log(result)
+            res.redirect('/')
+        })
+    })
+
 router.route('/create')
     .get((req,res,next) =>{
         res.render('create')
