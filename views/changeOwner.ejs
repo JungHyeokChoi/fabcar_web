@@ -11,10 +11,7 @@
                     <% } %>
                 </select>
             </div>
-        <div class="form-group">
-            <label for="InputOldOwner">Old Owner</label>
-            <input type="text" class="form-control" name="owner" id="InputOldOwner" value="$('selectValue')" disabled>
-        </div>
+        </div>    
         <div class="form-group">
             <label for="InputNewOwner">New Owner</label>
             <input type="text" class="form-control" name="owner" id="InputNewOwner" placeholder="New Owner">
@@ -22,13 +19,4 @@
         <button type="submit" class="btn btn-danger">Change</button>
     </form>
 </div>
-
-<script>
-    var selectValue = function getSelectValue(selectObj){
-        var selected_index = selectObj.selectedIndex;
-        var selected_value = selectObj.options[selected_index].value;
-
-        document.getElementById('InputOldOwner').value = selected_value;
-    }
-</script>
 <%- include('_footer.ejs') -%>
